@@ -37,6 +37,9 @@ export default class NavbarTop extends Component {
                         <NavItem>
                             <NavLink href="/math/">Math</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink onClick={() => window.TogetherJS(this)}>Start Collaboration</NavLink>
+                        </NavItem>
                         {/* <NavItem>
                             <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
                         </NavItem> */}
