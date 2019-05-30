@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 //components
 import NavbarTop from './components/NavbarTop';
-import MathQuillInput from './components/MathQuillInput';
 //views
 import Home from './views/Home';
+import Canvas from './views/Canvas';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class App extends React.Component {
           <div>        
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/math/" component={MathQuillInput} />
+              <Route path="/math/" component={Canvas} />
             </Switch>
           </div>
           
