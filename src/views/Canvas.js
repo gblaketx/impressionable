@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Editor from '../components/Editor/Editor'
 import MathQuillInput from '../components/MathQuillInput';
+import Webcam from "react-webcam";
+import WebcamCapture from '../components/WebCam'
+
 
 export default class Canvas extends Component {
     render() {
@@ -8,7 +11,9 @@ export default class Canvas extends Component {
             <div>
                 <Editor />
                 <MathQuillInput />
-            </div>
+                <WebcamCapture />
+
+           </div>
         )
     }
 }
