@@ -11,6 +11,7 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
+import { IoMdDownload } from 'react-icons/io';
     
 export default class NavbarTop extends Component {
     constructor(props) {
@@ -40,9 +41,11 @@ export default class NavbarTop extends Component {
                         <NavItem>
                             <NavLink onClick={() => window.TogetherJS(this)}>Start Collaboration</NavLink>
                         </NavItem>
-                        {/* <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                        </NavItem> */}
+                        <NavItem>
+                            <NavLink onClick={() => window.print()}>
+                                <IoMdDownload />
+                            </NavLink>
+                        </NavItem>
                         {/* <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
                                 Options
