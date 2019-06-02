@@ -24,12 +24,6 @@ class Editor extends Component {
         firepad.setHtml('<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/><br/>Collaborative-editing made easy.\n');
       }
     });
-
-    // this.lastMouse = {
-    //   x: 0,
-    //   y: 0
-    // };
-
   }
 
   // Helper to get hash from end of URL or generate a random one.
@@ -48,41 +42,12 @@ class Editor extends Component {
     return ref;
   }
 
-  // setupCanvas() {
-  //   const canvas = document.getElementById('drawCanvas');
-  //   const context = canvas.getContext('2d');
-
-  //   // brush settings
-  //   context.lineWidth = 2;
-  //   context.lineJoin = 'round';
-  //   context.lineCap = 'round';
-  //   context.strokeStyle = '#000';
-
-
-  //   // attach the mousedown, mouseout, mousemove, mouseup event listeners.
-  //   canvas.addEventListener('mousedown', function (e) {
-  //     lastMouse = {
-  //       x: e.pageX - this.offsetLeft,
-  //       y: e.pageY - this.offsetTop
-  //     };
-  //     canvas.addEventListener('mousemove', move, false);
-  //   }, false);
-
-  //   canvas.addEventListener('mouseout', function () {
-  //     canvas.removeEventListener('mousemove', move, false);
-  //   }, false);
-
-  //   canvas.addEventListener('mouseup', function () {
-  //     canvas.removeEventListener('mousemove', move, false);
-  //   }, false);
-
-  // }
-
   render() {
     return (
         <div>
             <div id="firepad-container"></div>
-            <DrawableCanvas />
+            <DrawableCanvas id={0}/>
+            <DrawableCanvas id={1}/>
         </div>
         
     );

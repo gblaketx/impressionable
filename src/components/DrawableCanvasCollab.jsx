@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import assign from 'object-assign'
+// import 'DrawableCanvasCollab.css'; TODO: remove file
 
 class DrawableCanvas extends React.Component {
 
@@ -16,7 +17,7 @@ class DrawableCanvas extends React.Component {
     const context = canvas.getContext('2d');
 
     window.TogetherJS.hub.on('draw', msg => {
-      if(!msg.sameUrl) {
+      if(!msg.sameUrl || msg.id !== this.props.id) {
         return;
       }
       this.draw(msg.lX, msg.lY, msg.cX, msg.cY);
@@ -39,9 +40,12 @@ class DrawableCanvas extends React.Component {
       lineWidth: 4,
       cursor: 'pointer',
       canvasStyle: {
-        backgroundColor: '#00FFDC'
+        backgroundColor: '#00FFDC',
       },
-      clear: false
+      clear: false,
+      borderStyle: 'solid',
+      borderWidth: 1,
+      borderColor: '#d6d7da',
     };
   }
 
@@ -82,6 +86,7 @@ class DrawableCanvas extends React.Component {
       
       if (window.TogetherJS.running) {
         window.TogetherJS.send({
+          id: this.props.id,
           type: 'draw',
           lX: lastX,
           lY: lastY,
@@ -108,6 +113,7 @@ class DrawableCanvas extends React.Component {
 
       if (window.TogetherJS.running) {
         window.TogetherJS.send({
+          id: this.props.id,
           type: 'draw',
           lX: lastX,
           lY: lastY,
@@ -145,7 +151,6 @@ class DrawableCanvas extends React.Component {
   canvasStyle(){
     const defaults = DrawableCanvas.getDefaultStyle();
     const custom = this.props.canvasStyle;
-
     return assign({}, defaults, custom);
   }
 
@@ -172,7 +177,8 @@ DrawableCanvas.propTypes = {
   canvasStyle: PropTypes.shape({
     backgroundColor: PropTypes.string
   }),
-  clear: PropTypes.bool
+  clear: PropTypes.bool,
+  id: PropTypes.number.isRequired,
 };
 
 export default DrawableCanvas;
