@@ -10,11 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     document.title = "Impressionable";
-
-    const togetherJS = document.createElement("script");
-    togetherJS.src = "https://togetherjs.com/togetherjs-min.js";
-    togetherJS.async = true;
-    document.body.appendChild(togetherJS);
   }
 
   render() {
