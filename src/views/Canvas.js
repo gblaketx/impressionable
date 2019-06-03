@@ -14,6 +14,7 @@ export default class Canvas extends Component {
                 <Editor />
                 <MathQuillInput />
                 <WebCamAndCrop />
+                <App />
            </div>
         )
     }
