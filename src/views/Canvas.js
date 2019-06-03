@@ -12,7 +12,7 @@ export default class Canvas extends Component {
         return (
             <div>
                 <Editor />
-                <MathQuillInput />
+                <MathQuillInput id={0} />
                 <WebCamAndCrop />
                 <App />
            </div>
