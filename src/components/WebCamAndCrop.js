@@ -6,7 +6,15 @@ import Webcam from "react-webcam";
 
 // import "./App.css";
 
-export default class WebCamAndCrop extends PureComponent {
+export default class WebCamAndCrop extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { webcamEnabled: false };
+  }
+
+  enableWebcam = () => this.setState({ webcamEnabled: !this.state.webcamEnabled });
+
+
   setRef = webcam => {
     this.webcam = webcam;
   };
@@ -102,13 +110,23 @@ export default class WebCamAndCrop extends PureComponent {
 
     return (
       <div className="App">
-        <Webcam
-          audio={false}
-          height={350}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={350}
-          />
+        <div>
+          {this.state.webcamEnabled ? (
+          <Webcam
+            audio={false}
+            height={350}
+            ref={this.setRef}
+            screenshotFormat="image/jpeg"
+            width={350}
+            /> ) : null
+        } 
+        </div>
+
+        <button type="button" onClick={this.enableWebcam}>
+          Enable webcam
+        </button>
+          
+
         <div>
           <h2>Screenshots</h2>
           <div className='screenshots'>
