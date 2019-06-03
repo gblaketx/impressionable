@@ -1739,7 +1739,7 @@ firepad.RichTextToolbar = (function(global) {
 
   utils.makeEventEmitter(RichTextToolbar, ['bold', 'italic', 'underline', 'strike', 'font', 'font-size', 'color',
     'left', 'center', 'right', 'unordered-list', 'ordered-list', 'todo-list', 'indent-increase', 'indent-decrease',
-                                           'undo', 'redo', 'insert-image']);
+                                           'undo', 'redo', 'insert-image', 'insert-math']);
 
   RichTextToolbar.prototype.element = function() { return this.element_; };
 
@@ -1772,6 +1772,8 @@ firepad.RichTextToolbar = (function(global) {
     if (self.imageInsertionUI) {
       toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-image')], { 'class': 'firepad-btn-group' }));
     }
+
+    toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-math', 'insert-image')], {'class': 'firepad-btn-group'}));
 
     var toolbarWrapper = utils.elt('div', toolbarOptions, { 'class': 'firepad-toolbar-wrapper' });
     var toolbar = utils.elt('div', null, { 'class': 'firepad-toolbar' });
@@ -6319,6 +6321,10 @@ firepad.Firepad = (function(global) {
    this.firepadWrapper_.appendChild(dialog);
   };
 
+  Firepad.prototype.insertMath = function() {
+    this.insertEntity('img', {'src': 'https://images.pexels.com/photos/2422/sky-earth-galaxy-universe.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500' });
+  };
+
   Firepad.prototype.addToolbar_ = function() {
     this.toolbar = new RichTextToolbar(this.imageInsertionUI);
 
@@ -6340,6 +6346,7 @@ firepad.Firepad = (function(global) {
     this.toolbar.on('indent-increase', this.indent, this);
     this.toolbar.on('indent-decrease', this.unindent, this);
     this.toolbar.on('insert-image', this.makeImageDialog_, this);
+    this.toolbar.on('insert-math', this.insertMath, this);
 
     this.firepadWrapper_.insertBefore(this.toolbar.element(), this.firepadWrapper_.firstChild);
   };

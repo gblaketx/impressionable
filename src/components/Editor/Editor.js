@@ -7,7 +7,7 @@ class Editor extends Component {
     //// Initialize Firebase.
     //// TODO: replace with your Firebase project configuration.
     var config = {
-      apiKey: "AIzaSyC_sS0XzK92EuGnt-i2CuNNhwH57ag8sJA",
+      apiKey: process.env['API_KEY'],
       databaseURL: "https://impressions-ef38e.firebaseio.com/",
     };
     window.firebase.initializeApp(config);
