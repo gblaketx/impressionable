@@ -3,6 +3,8 @@ import React, { PureComponent } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import Webcam from "react-webcam";
+import Popup from "reactjs-popup";
+
 
 // import "./App.css";
 
@@ -140,45 +142,48 @@ export default class WebCamAndCrop extends React.Component {
     const { crop, croppedImageUrl, src } = this.state;
 
     return (
-      <div className="App">
-        <div>
-          {this.state.webcamEnabled ? (
-          <Webcam
-            audio={false}
-            height={350}
-            ref={this.setRef}
-            screenshotFormat="image/jpeg"
-            width={350}
-            /> ) : null
-        } 
-        </div>
-
-        <button type="button" onClick={this.enableWebcam}>
-          Enable webcam
-        </button>
-          
-
-        <div>
-          <h2>Screenshots</h2>
-          <div className='screenshots'>
-            <div className='controls'>
-              <button onClick={this.capture}>capture</button>
-            </div>
-             <ReactCrop
-              src={this.state.screenshot}
-              crop={crop}
-              onImageLoaded={this.onImageLoaded}
-              onComplete={this.onCropComplete}
-              onChange={this.onCropChange}
-            />
+      <Popup trigger={<button>Take screenshot</button>} position="right center">
+        <div className="App">
+          <div>
+            {this.state.webcamEnabled ? (
+            <Webcam
+              audio={false}
+              height={350}
+              ref={this.setRef}
+              screenshotFormat="image/jpeg"
+              width={350}
+              /> ) : null
+          } 
           </div>
+
+          <button type="button" onClick={this.enableWebcam}>
+            Enable webcam
+          </button>
+            
+
+          <div>
+            <h2>Screenshots</h2>
+            <div className='screenshots'>
+              <div className='controls'>
+                <button onClick={this.capture}>capture</button>
+              </div>
+               <ReactCrop
+                src={this.state.screenshot}
+                crop={crop}
+                onImageLoaded={this.onImageLoaded}
+                onComplete={this.onCropComplete}
+                onChange={this.onCropChange}
+              />
+            </div>
+          </div>
+          <div>
+          {croppedImageUrl && (
+            <img alt="Crop" style={{ maxWidth: "100%" }} src={croppedImageUrl} />
+          )}
         </div>
-        <div>
-        {croppedImageUrl && (
-          <img alt="Crop" style={{ maxWidth: "100%" }} src={croppedImageUrl} />
-        )}
-      </div>
-      </div>
+        </div>
+      </Popup>
+
     );
   }
 }
