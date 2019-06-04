@@ -33,7 +33,6 @@ class MathQuillInput extends React.Component {
       if(!msg.sameUrl || msg.id !== this.props.id) {
         return;
       }
-      console.log('Got drag message', msg);
       this.setState({
         dragPosition: {x: msg.x, y: msg.y}
       })
@@ -41,7 +40,6 @@ class MathQuillInput extends React.Component {
   }
 
   handleDrag = (evt) => {
-    console.log('Dragging', evt);
     this.setState({
       dragPosition: {x: evt.layerX, y: evt.layerY }
     });
