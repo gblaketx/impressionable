@@ -1,0 +1,6 @@
+.triangle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(to bottom right, #727272 0%, #727272 50%, #fff 50%, #fff 100%);
+}

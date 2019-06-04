@@ -2,15 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import assign from 'object-assign'
-// import 'DrawableCanvasCollab.css'; TODO: remove file
+import Draggable from 'react-draggable';
+import './DrawableCanvas.css'; 
 
 class DrawableCanvas extends React.Component {
 
   componentDidMount() {
-    const canvas = ReactDOM.findDOMNode(this);
+    const canvas = ReactDOM.findDOMNode(this).children[1];
+    console.log(canvas);
 
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
+    // canvas.style.width = '100%';
+    // canvas.style.height = '100%';
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 
@@ -43,9 +45,6 @@ class DrawableCanvas extends React.Component {
         backgroundColor: '#00FFDC',
       },
       clear: false,
-      borderStyle: 'solid',
-      borderWidth: 1,
-      borderColor: '#d6d7da',
     };
   }
 
@@ -156,15 +155,27 @@ class DrawableCanvas extends React.Component {
 
   render() {
     return (
-      <canvas style = {this.canvasStyle()}
-        onMouseDown = {this.handleOnMouseDown.bind(this)}
-        onTouchStart = {this.handleOnTouchStart.bind(this)}
-        onMouseMove = {this.handleOnMouseMove.bind(this)}
-        onTouchMove = {this.handleOnTouchMove.bind(this)}
-        onMouseUp = {this.handleonMouseUp.bind(this)}
-        onTouchEnd = {this.handleonMouseUp.bind(this)}
-      >
-      </canvas>
+      <Draggable handle=".triangle">
+        <div style={{
+            width: 300,
+            height: 300,
+            borderStyle: 'solid',
+            borderWidth: 1,
+            borderColor: '#d6d7da',
+          }}>
+          <div className="triangle" />
+          <canvas style = {this.canvasStyle()}
+            width={300}
+            height={300}
+            onMouseDown = {this.handleOnMouseDown.bind(this)}
+            onTouchStart = {this.handleOnTouchStart.bind(this)}
+            onMouseMove = {this.handleOnMouseMove.bind(this)}
+            onTouchMove = {this.handleOnTouchMove.bind(this)}
+            onMouseUp = {this.handleonMouseUp.bind(this)}
+            onTouchEnd = {this.handleonMouseUp.bind(this)}
+          />
+        </div>
+      </Draggable>
     );
   }
 

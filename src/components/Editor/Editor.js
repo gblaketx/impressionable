@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DrawableCanvas from "../DrawableCanvasCollab";
+import DrawableCanvas from "../DrawableCanvasCollab/DrawableCanvas";
 import './Editor.css'; 
 
 class Editor extends Component {
