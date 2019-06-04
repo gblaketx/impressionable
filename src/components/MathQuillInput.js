@@ -11,6 +11,7 @@ class MathQuillInput extends React.Component {
     this.state = {
       latex: '',
       sendChanges: true,
+      dragPosition: {x: 0, y: 0},
     }
   }
 
@@ -19,7 +20,6 @@ class MathQuillInput extends React.Component {
       if(!msg.sameUrl || msg.id !== this.props.id) {
         return;
       }
-      console.log("Got write message", msg);
       this.setState({
         // latex: msg.latex,
         sendChanges: false,
@@ -28,6 +28,31 @@ class MathQuillInput extends React.Component {
         this.setState({ sendChanges: true });
       });
     });
+
+    window.TogetherJS.hub.on('drag', msg => {
+      if(!msg.sameUrl || msg.id !== this.props.id) {
+        return;
+      }
+      console.log('Got drag message', msg);
+      this.setState({
+        dragPosition: {x: msg.x, y: msg.y}
+      })
+    });
+  }
+
+  handleDrag = (evt) => {
+    console.log('Dragging', evt);
+    this.setState({
+      dragPosition: {x: evt.layerX, y: evt.layerY }
+    });
+    if(window.TogetherJS.running) {
+      window.TogetherJS.send({
+        id: this.props.id,
+        type: 'drag',
+        x: evt.layerX,
+        y: evt.layerY,
+      });
+    }
   }
  
   render() {
@@ -35,6 +60,8 @@ class MathQuillInput extends React.Component {
     return (
       <Draggable
         enableUserSelectHack={false}
+        onDrag={this.handleDrag}
+        position={this.state.dragPosition}
       >
         <div 
           {...props}
