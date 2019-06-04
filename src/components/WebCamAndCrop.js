@@ -6,10 +6,30 @@ import Webcam from "react-webcam";
 
 // import "./App.css";
 
+import firebase from 'firebase';
+
 export default class WebCamAndCrop extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { webcamEnabled: false };
+    this.state = { 
+      webcamEnabled: false,
+      croppedBlob: null,
+    };
+    this.storageRef = null;
+  }
+
+  componentDidMount() {
+    var config = {
+      apiKey: 'AIzaSyDQa22Mo0GWowVAgRyuVuxhv-op07n0u8k',
+      authDomain: 'impressions-ef38e.firebaseapp.com',
+      databaseURL: 'https://impressions-ef38e.firebaseio.com',
+      storageBucket: 'gs://impressions-ef38e.appspot.com/'
+    };
+    firebase.initializeApp(config);
+  
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    var storage = firebase.storage();
+    this.storageRef = storage.ref();
   }
 
   enableWebcam = () => this.setState({ webcamEnabled: !this.state.webcamEnabled });
@@ -53,6 +73,7 @@ export default class WebCamAndCrop extends React.Component {
 
   onCropComplete = crop => {
     this.makeClientCrop(crop);
+    
   };
 
   onCropChange = crop => {
@@ -98,7 +119,17 @@ export default class WebCamAndCrop extends React.Component {
           return;
         }
         blob.name = fileName;
-        window.URL.revokeObjectURL(this.fileUrl);
+
+        this.setState({
+          croppedBlob: blob,
+        }, () => {
+          var imagesRef = this.storageRef.child('images/' + fileName);
+          imagesRef.put(this.state.croppedBlob).then(function(snapshot) {
+            console.log('Uploaded a blob or file!');
+          });
+        }); // use the Blob or File API
+
+        window.URL.revokeObjectURL(this.fileUrl); //overwrite the file
         this.fileUrl = window.URL.createObjectURL(blob);
         resolve(this.fileUrl);
       }, "image/jpeg");
