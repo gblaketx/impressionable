@@ -6322,7 +6322,9 @@ firepad.Firepad = (function(global) {
   };
 
   Firepad.prototype.insertMath = function() {
-    this.insertEntity('img', {'src': 'https://images.pexels.com/photos/2422/sky-earth-galaxy-universe.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500' });
+    var baseUrl = 'https://firebasestorage.googleapis.com/v0/b/impressions-ef38e.appspot.com/o/images%2FnewFile.jpeg?alt=media&token=';
+    var insertedImageUrl = localStorage.getItem('insertedImageUrl');
+    this.insertEntity('img', {'src': baseUrl + insertedImageUrl });
   };
 
   Firepad.prototype.addToolbar_ = function() {
