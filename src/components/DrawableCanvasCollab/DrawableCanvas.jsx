@@ -183,6 +183,7 @@ class DrawableCanvas extends React.Component {
   render() {
     return (
       <Draggable
+        // style={{position: 'absolute'}}
         handle=".triangle"
         onDrag={this.handleDrag}
         position={this.state.dragPosition} // TODO: can't drag over lines with this
@@ -194,6 +195,7 @@ class DrawableCanvas extends React.Component {
             borderWidth: 1,
             borderColor: '#d6d7da',
             zIndex: 100,
+            position: 'absolute',
           }}>
           <div className="triangle" />
           <canvas style = {this.canvasStyle()}

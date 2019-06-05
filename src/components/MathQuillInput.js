@@ -66,6 +66,7 @@ class MathQuillInput extends React.Component {
           style={{
             width: 30,
             zIndex: 100,
+            position: 'absolute',
           }}
         >
           <MathQuill

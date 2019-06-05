@@ -28,6 +28,7 @@ export default class NavbarTop extends Component {
         });
     }
     render() {
+        const { onAddDraggable } = this.props;
         return (
         <div>
             <Navbar color="light" light expand="md">
@@ -36,7 +37,10 @@ export default class NavbarTop extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink href="/math/">Math</NavLink>
+                            <NavLink onClick={() => onAddDraggable('math')}>Insert Math</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink onClick={() => onAddDraggable('canvas')}>Insert Annotation</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink onClick={() => window.TogetherJS(this)}>Start Collaboration</NavLink>
