@@ -29,7 +29,7 @@ class DrawableCanvas extends React.Component {
     });
 
     window.TogetherJS.hub.on('drag', msg => {
-      if(!msg.sameUrl || msg.id !== this.props.id) {
+      if(!msg.sameUrl || msg.id !== `canvas-${this.props.id}`) {
         return;
       }
       this.setState({
@@ -98,7 +98,7 @@ class DrawableCanvas extends React.Component {
       
       if (window.TogetherJS.running) {
         window.TogetherJS.send({
-          id: this.props.id,
+          id: `canvas-${this.props.id}`,
           type: 'draw',
           lX: lastX,
           lY: lastY,
@@ -172,7 +172,7 @@ class DrawableCanvas extends React.Component {
     });
     if(window.TogetherJS.running) {
       window.TogetherJS.send({
-        id: this.props.id,
+        id: `canvas-${this.props.id}`,
         type: 'drag',
         x: evt.layerX,
         y: evt.layerY,
@@ -185,7 +185,7 @@ class DrawableCanvas extends React.Component {
       <Draggable
         handle=".triangle"
         onDrag={this.handleDrag}
-        // position={this.state.dragPosition} // TODO: can't drag over lines with this
+        position={this.state.dragPosition} // TODO: can't drag over lines with this
       >
         <div style={{
             width: 300,

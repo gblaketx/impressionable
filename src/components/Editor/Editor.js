@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DrawableCanvas from "../DrawableCanvasCollab/DrawableCanvas";
+import MathQuillInput from '../MathQuillInput';
 import './Editor.css'; 
 
 class Editor extends Component {
@@ -48,6 +49,7 @@ class Editor extends Component {
             <div id="firepad-container"></div>
             <DrawableCanvas id={0}/>
             <DrawableCanvas id={1}/>
+            <MathQuillInput id={0} />
         </div>
         
     );

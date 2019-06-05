@@ -30,7 +30,7 @@ class MathQuillInput extends React.Component {
     });
 
     window.TogetherJS.hub.on('drag', msg => {
-      if(!msg.sameUrl || msg.id !== this.props.id) {
+      if(!msg.sameUrl || msg.id !== `math-${this.props.id}`) {
         return;
       }
       this.setState({
@@ -45,7 +45,7 @@ class MathQuillInput extends React.Component {
     });
     if(window.TogetherJS.running) {
       window.TogetherJS.send({
-        id: this.props.id,
+        id: `math-${this.props.id}`,
         type: 'drag',
         x: evt.layerX,
         y: evt.layerY,
@@ -63,7 +63,10 @@ class MathQuillInput extends React.Component {
       >
         <div 
           {...props}
-          style={{ zIndex: 100 }}
+          style={{
+            width: 30,
+            zIndex: 100,
+          }}
         >
           <MathQuill
             mathquillDidMount = {mathField => { this.mathField = mathField}}
