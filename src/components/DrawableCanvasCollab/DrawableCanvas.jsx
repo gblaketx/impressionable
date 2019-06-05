@@ -6,13 +6,16 @@ import Draggable from 'react-draggable';
 import './DrawableCanvas.css'; 
 
 class DrawableCanvas extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dragPosition: { x: 0, y: 0 }
+    }
+  }
 
   componentDidMount() {
     const canvas = ReactDOM.findDOMNode(this).children[1];
-    console.log(canvas);
 
-    // canvas.style.width = '100%';
-    // canvas.style.height = '100%';
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 
@@ -23,6 +26,15 @@ class DrawableCanvas extends React.Component {
         return;
       }
       this.draw(msg.lX, msg.lY, msg.cX, msg.cY);
+    });
+
+    window.TogetherJS.hub.on('drag', msg => {
+      if(!msg.sameUrl || msg.id !== this.props.id) {
+        return;
+      }
+      this.setState({
+        dragPosition: { x: msg.x, y: msg.y }
+      });
     });
 
     this.setState({
@@ -36,6 +48,7 @@ class DrawableCanvas extends React.Component {
       this.resetCanvas();
     }
   }
+
   static getDefaultStyle() {
     return {
       brushColor: '#FFFF00',
@@ -153,15 +166,34 @@ class DrawableCanvas extends React.Component {
     return assign({}, defaults, custom);
   }
 
+  handleDrag = (evt) => {
+    this.setState({
+      dragPosition: {x: evt.layerX, y: evt.layerY }
+    });
+    if(window.TogetherJS.running) {
+      window.TogetherJS.send({
+        id: this.props.id,
+        type: 'drag',
+        x: evt.layerX,
+        y: evt.layerY,
+      });
+    }
+  }
+
   render() {
     return (
-      <Draggable handle=".triangle">
+      <Draggable
+        handle=".triangle"
+        onDrag={this.handleDrag}
+        // position={this.state.dragPosition} // TODO: can't drag over lines with this
+      >
         <div style={{
             width: 300,
             height: 300,
             borderStyle: 'solid',
             borderWidth: 1,
             borderColor: '#d6d7da',
+            zIndex: 100,
           }}>
           <div className="triangle" />
           <canvas style = {this.canvasStyle()}

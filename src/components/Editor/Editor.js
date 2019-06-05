@@ -44,7 +44,7 @@ class Editor extends Component {
 
   render() {
     return (
-        <div>
+        <div style={{ display: 'flex' }}>
             <div id="firepad-container"></div>
             <DrawableCanvas id={0}/>
             <DrawableCanvas id={1}/>

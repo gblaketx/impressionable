@@ -11,7 +11,7 @@ class MathQuillInput extends React.Component {
     this.state = {
       latex: '',
       sendChanges: true,
-      dragPosition: {x: 0, y: 0},
+      dragPosition: { x: 0, y: 0 },
     }
   }
 
@@ -34,8 +34,8 @@ class MathQuillInput extends React.Component {
         return;
       }
       this.setState({
-        dragPosition: {x: msg.x, y: msg.y}
-      })
+        dragPosition: { x: msg.x, y: msg.y }
+      });
     });
   }
 
@@ -63,6 +63,7 @@ class MathQuillInput extends React.Component {
       >
         <div 
           {...props}
+          style={{ zIndex: 100 }}
         >
           <MathQuill
             mathquillDidMount = {mathField => { this.mathField = mathField}}
