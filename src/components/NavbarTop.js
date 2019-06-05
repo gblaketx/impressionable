@@ -11,8 +11,9 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
-import { IoMdDownload } from 'react-icons/io';
-    
+import { IoMdCreate, IoMdDownload } from 'react-icons/io';
+import sigma from '../icons/sigma.svg';    
+
 export default class NavbarTop extends Component {
     constructor(props) {
         super(props);
@@ -37,10 +38,14 @@ export default class NavbarTop extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink onClick={() => onAddDraggable('math')}>Insert Math</NavLink>
+                            <NavLink onClick={() => onAddDraggable('math')}>
+                                <img width={20} height={20} src={sigma} alt="sigma" />
+                            </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink onClick={() => onAddDraggable('canvas')}>Insert Annotation</NavLink>
+                            <NavLink onClick={() => onAddDraggable('canvas')}>
+                                <IoMdCreate />
+                            </NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink onClick={() => window.TogetherJS(this)}>Start Collaboration</NavLink>
@@ -50,23 +55,6 @@ export default class NavbarTop extends Component {
                                 <IoMdDownload />
                             </NavLink>
                         </NavItem>
-                        {/* <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                Options
-                            </DropdownToggle>
-                            <DropdownMenu right>
-                            <DropdownItem>
-                                Option 1
-                            </DropdownItem>
-                            <DropdownItem>
-                                Option 2
-                            </DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>
-                                Reset
-                            </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown> */}
                     </Nav>
                 </Collapse>
             </Navbar>

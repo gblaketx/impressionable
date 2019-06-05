@@ -6,7 +6,6 @@ import WebCamAndCrop from './components/WebCamAndCrop';
 import DrawableCanvas from "./components/DrawableCanvasCollab/DrawableCanvas";
 import MathQuillInput from './components/MathQuillInput';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,16 +13,16 @@ class App extends React.Component {
     this.state = {
       draggables: [],
     }
-
   }
 
   componentDidMount() {
     window.TogetherJS.hub.on('addItem', msg => {
-      if(!msg.sameUrl || msg.id !== this.props.id) {
+      if(!msg.sameUrl) {
         return;
       }
-      // TODO
-      console.log("Added item", msg);
+      const { draggables } = this.state;
+      draggables.push(msg.item);
+      this.setState({ draggables });
     });
   }
 
@@ -33,21 +32,18 @@ class App extends React.Component {
 
   addDraggable(type) {
     var { draggables } = this.state;
-    // var draggable;
-    const id = draggables.length;
-
-    draggables.push({ type, id });
-    // if (type === "canvas") {
-    //   // draggables.push(<DrawableCanvas key={id} id={id} />);
-    // } else if (type === "math") {
-    //   // draggables.push(<MathQuillInput key={id} id={id} />);
-    // }
-
+    const item = { type, id: draggables.length }
+    draggables.push(item);
     this.setState({ draggables });
-    console.log(draggables);
+
+    if (window.TogetherJS.running) {
+      window.TogetherJS.send({
+        type: 'addItem',
+        item
+      });
+    }
+
   }
-
-
 
   render() {
     return (

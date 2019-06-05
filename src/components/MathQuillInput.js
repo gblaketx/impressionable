@@ -21,7 +21,6 @@ class MathQuillInput extends React.Component {
         return;
       }
       this.setState({
-        // latex: msg.latex,
         sendChanges: false,
       }, () => {
         this.mathField.latex(msg.latex);

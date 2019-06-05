@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from '../contract.svg';
+import logo from '../icons/contract.svg';
 import '../App.css';
 
 export default class Home extends Component {
