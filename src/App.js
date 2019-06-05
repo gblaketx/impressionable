@@ -10,13 +10,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     document.title = "Impressionable";
+
+  }
+
+  onScreenShotCapture() {
+    console.log("SCREEN CAPTURED");
   }
 
   render() {
     return (
       <div className="App">
         <Router>
-          <NavbarTop />
+          <NavbarTop onScreenShotCapture={this.onScreenShotCapture} />
           <div>        
             <Switch>
               <Route exact path="/" component={Home} />

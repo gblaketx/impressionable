@@ -1741,7 +1741,7 @@ firepad.RichTextToolbar = (function(global) {
 
   utils.makeEventEmitter(RichTextToolbar, ['bold', 'italic', 'underline', 'strike', 'font', 'font-size', 'color',
     'left', 'center', 'right', 'unordered-list', 'ordered-list', 'todo-list', 'indent-increase', 'indent-decrease',
-                                           'undo', 'redo', 'insert-image', 'insert-math']);
+                                           'undo', 'redo', 'insert-image', 'insert-math', 'insert-screenshot']);
 
   RichTextToolbar.prototype.element = function() { return this.element_; };
 
@@ -1772,10 +1772,11 @@ firepad.RichTextToolbar = (function(global) {
     ];
 
     if (self.imageInsertionUI) {
-      toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-image')], { 'class': 'firepad-btn-group' }));
+      // toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-image')], { 'class': 'firepad-btn-group' }));
+      toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-image'), self.makeButton_('insert-math')], {'class': 'firepad-btn-group'}));
     }
 
-    toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-math', 'insert-image')], {'class': 'firepad-btn-group'}));
+    toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-screenshot')], {'class': 'firepad-btn-group'}));
 
     var toolbarWrapper = utils.elt('div', toolbarOptions, { 'class': 'firepad-toolbar-wrapper' });
     var toolbar = utils.elt('div', null, { 'class': 'firepad-toolbar' });
@@ -6344,6 +6345,12 @@ firepad.Firepad = (function(global) {
     // this.insertEntity('button', {type:'button'});
   };
 
+  Firepad.prototype.insertScreenShot = function() {
+    var baseUrl = 'https://firebasestorage.googleapis.com/v0/b/impressions-ef38e.appspot.com/o/images%2FnewFile.jpeg?alt=media&token=';
+    var insertedImageUrl = localStorage.getItem('insertedImageUrl');
+    this.insertEntity('img', {'src': baseUrl + insertedImageUrl });
+  };
+
   Firepad.prototype.addToolbar_ = function() {
     this.toolbar = new RichTextToolbar(this.imageInsertionUI);
 
@@ -6366,6 +6373,7 @@ firepad.Firepad = (function(global) {
     this.toolbar.on('indent-decrease', this.unindent, this);
     this.toolbar.on('insert-image', this.makeImageDialog_, this);
     this.toolbar.on('insert-math', this.insertMath, this);
+    this.toolbar.on('insert-screenshot', this.insertScreenShot, this);
 
     this.firepadWrapper_.insertBefore(this.toolbar.element(), this.firepadWrapper_.firstChild);
   };

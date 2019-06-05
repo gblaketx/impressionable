@@ -128,6 +128,16 @@ export default class WebCamAndCrop extends React.Component {
           var imagesRef = this.storageRef.child('images/' + fileName);
           imagesRef.put(this.state.croppedBlob).then(function(snapshot) {
             console.log('Uploaded a blob or file!');
+
+            fetch('https://firebasestorage.googleapis.com/v0/b/impressions-ef38e.appspot.com/o/images%2FnewFile.jpeg')
+              .then(function(response) {
+                return response.json();
+              })
+              .then(function(myJson) {
+                var insertedImageUrl = myJson['downloadTokens'];
+                console.log(JSON.stringify(insertedImageUrl));
+                localStorage.setItem('insertedImageUrl', insertedImageUrl);
+              });
           });
         }); // use the Blob or File API
 

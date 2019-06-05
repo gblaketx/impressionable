@@ -273,7 +273,31 @@ a.firepad-btn:active {
   font-style: normal;
 }
 
-.firepad-tb-bold, .firepad-tb-italic, .firepad-tb-underline, .firepad-tb-strikethrough, .firepad-tb-list, .firepad-tb-list-2, .firepad-tb-numbered-list, .firepad-tb-paragraph-left, .firepad-tb-paragraph-center, .firepad-tb-paragraph-right, .firepad-tb-paragraph-justify, .firepad-tb-menu, .firepad-tb-link, .firepad-tb-undo, .firepad-tb-redo, .firepad-tb-box-add, .firepad-tb-box-remove, .firepad-tb-print, .firepad-tb-indent-decrease, .firepad-tb-indent-increase, .firepad-tb-insert-image, .firepad-tb-bubble {
+.firepad-tb-bold, 
+.firepad-tb-italic, 
+.firepad-tb-underline, 
+.firepad-tb-strikethrough, 
+.firepad-tb-list, 
+.firepad-tb-list-2, 
+.firepad-tb-numbered-list, 
+.firepad-tb-paragraph-left, 
+.firepad-tb-paragraph-center, 
+.firepad-tb-paragraph-right, 
+.firepad-tb-paragraph-justify, 
+.firepad-tb-menu, 
+.firepad-tb-link, 
+.firepad-tb-undo, 
+.firepad-tb-redo, 
+.firepad-tb-box-add, 
+.firepad-tb-box-remove, 
+.firepad-tb-print, 
+.firepad-tb-indent-decrease, 
+.firepad-tb-indent-increase, 
+.firepad-tb-insert-image, 
+.firepad-tb-bubble, 
+.firepad-tb-insert-math,
+.firepad-tb-insert-screenshot
+{
   font-family: 'firepad';
   speak: none;
   font-style: normal;
@@ -348,4 +372,10 @@ a.firepad-btn:active {
 }
 .firepad-tb-bubble:before {
   content: "\e00f";
+}
+.firepad-tb-insert-math:before {
+  content: "\e011";
+}
+.firepad-tb-insert-screenshot:before {
+  content: "\e010";
 }
