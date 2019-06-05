@@ -2,15 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import assign from 'object-assign'
-// import 'DrawableCanvasCollab.css'; TODO: remove file
+import Draggable from 'react-draggable';
+import './DrawableCanvas.css'; 
 
 class DrawableCanvas extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dragPosition: { x: 0, y: 0 }
+    }
+  }
 
   componentDidMount() {
-    const canvas = ReactDOM.findDOMNode(this);
+    const canvas = ReactDOM.findDOMNode(this).children[1];
 
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 
@@ -21,6 +26,15 @@ class DrawableCanvas extends React.Component {
         return;
       }
       this.draw(msg.lX, msg.lY, msg.cX, msg.cY);
+    });
+
+    window.TogetherJS.hub.on('drag', msg => {
+      if(!msg.sameUrl || msg.id !== this.props.id) {
+        return;
+      }
+      this.setState({
+        dragPosition: { x: msg.x, y: msg.y }
+      });
     });
 
     this.setState({
@@ -34,6 +48,7 @@ class DrawableCanvas extends React.Component {
       this.resetCanvas();
     }
   }
+
   static getDefaultStyle() {
     return {
       brushColor: '#FFFF00',
@@ -43,9 +58,6 @@ class DrawableCanvas extends React.Component {
         backgroundColor: '#00FFDC',
       },
       clear: false,
-      borderStyle: 'solid',
-      borderWidth: 1,
-      borderColor: '#d6d7da',
     };
   }
 
@@ -154,17 +166,48 @@ class DrawableCanvas extends React.Component {
     return assign({}, defaults, custom);
   }
 
+  handleDrag = (evt) => {
+    this.setState({
+      dragPosition: {x: evt.layerX, y: evt.layerY }
+    });
+    if(window.TogetherJS.running) {
+      window.TogetherJS.send({
+        id: this.props.id,
+        type: 'drag',
+        x: evt.layerX,
+        y: evt.layerY,
+      });
+    }
+  }
+
   render() {
     return (
-      <canvas style = {this.canvasStyle()}
-        onMouseDown = {this.handleOnMouseDown.bind(this)}
-        onTouchStart = {this.handleOnTouchStart.bind(this)}
-        onMouseMove = {this.handleOnMouseMove.bind(this)}
-        onTouchMove = {this.handleOnTouchMove.bind(this)}
-        onMouseUp = {this.handleonMouseUp.bind(this)}
-        onTouchEnd = {this.handleonMouseUp.bind(this)}
+      <Draggable
+        handle=".triangle"
+        onDrag={this.handleDrag}
+        // position={this.state.dragPosition} // TODO: can't drag over lines with this
       >
-      </canvas>
+        <div style={{
+            width: 300,
+            height: 300,
+            borderStyle: 'solid',
+            borderWidth: 1,
+            borderColor: '#d6d7da',
+            zIndex: 100,
+          }}>
+          <div className="triangle" />
+          <canvas style = {this.canvasStyle()}
+            width={300}
+            height={300}
+            onMouseDown = {this.handleOnMouseDown.bind(this)}
+            onTouchStart = {this.handleOnTouchStart.bind(this)}
+            onMouseMove = {this.handleOnMouseMove.bind(this)}
+            onTouchMove = {this.handleOnTouchMove.bind(this)}
+            onMouseUp = {this.handleonMouseUp.bind(this)}
+            onTouchEnd = {this.handleonMouseUp.bind(this)}
+          />
+        </div>
+      </Draggable>
     );
   }
 
