@@ -11,6 +11,8 @@
  * With code from ot.js (Copyright 2012-2013 Tim Baumann)
  */
 
+// import MathQuillInput from '../src/components/MathQuillInput'; 
+
 (function (name, definition, context) {
   //try CommonJS, then AMD (require.js), then use global.
   if (typeof module != 'undefined' && module.exports) module.exports = definition();
@@ -6321,10 +6323,28 @@ firepad.Firepad = (function(global) {
    this.firepadWrapper_.appendChild(dialog);
   };
 
+
   Firepad.prototype.insertMath = function() {
     var baseUrl = 'https://firebasestorage.googleapis.com/v0/b/impressions-ef38e.appspot.com/o/images%2FnewFile.jpeg?alt=media&token=';
     var insertedImageUrl = localStorage.getItem('insertedImageUrl');
     this.insertEntity('img', {'src': baseUrl + insertedImageUrl });
+    const MathQuillInput = require('../src/components/MathQuillInput');
+    // console.log("I Am logging");
+    // console.log(MathQuillInput);
+    // this.insertEntity('img', {'src': 'https://images.pexels.com/photos/2422/sky-earth-galaxy-universe.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500' });
+    // this.insertEntity('canvas', { 
+    //   'style': {
+    //     'width': 100,
+    //     'height': 100,
+    //     'border-style': 'solid',
+    //     'border-width': 1,
+    //     'border-color': '#d6d7da',
+    //     'canvas-style': {
+    //       'backgroundColor': '#00FFDC',
+    //     }
+    //   }
+    // });
+    // this.insertEntity('button', {type:'button'});
   };
 
   Firepad.prototype.addToolbar_ = function() {
