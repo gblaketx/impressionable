@@ -65,7 +65,7 @@ class InstructionsModal extends PureComponent {
             </span>
           </div>
           <br />
-          <IoIosInformationCircleOutline style={{ width: 30, height: 30 }} /> Need a refresher? Just press the "i" to see this page again!
+          Need a refresher? Just press <IoIosInformationCircleOutline style={{ width: 30, height: 30 }} /> to see this page again!
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>Got it!</Button>
