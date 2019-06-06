@@ -21,7 +21,7 @@ export default class WebCamAndCrop extends React.Component {
     this.storageRef = null;
 
     var config = {
-      apiKey: 'AIzaSyDQa22Mo0GWowVAgRyuVuxhv-op07n0u8k',
+      apiKey: process.env['API_KEY'],
       authDomain: 'impressions-ef38e.firebaseapp.com',
       databaseURL: 'https://impressions-ef38e.firebaseio.com',
       storageBucket: 'gs://impressions-ef38e.appspot.com/'
