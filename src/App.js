@@ -3,8 +3,9 @@ import Editor from './components/Editor/Editor'
 import NavbarTop from './components/NavbarTop';
 import DropAndCrop from './components/DropAndCrop';
 import WebCamAndCrop from './components/WebCamAndCrop';
-import DrawableCanvas from "./components/DrawableCanvasCollab/DrawableCanvas";
+import DrawableCanvas from './components/DrawableCanvasCollab/DrawableCanvas';
 import MathQuillInput from './components/MathQuillInput';
+import InstructionsModal from './components/InstructionsModal/InstructionsModal';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends React.Component {
     document.title = "Impressionable";
     this.state = {
       draggables: [],
+      isModalOpen: true,
     }
   }
 
@@ -42,8 +44,11 @@ class App extends React.Component {
         item
       });
     }
-
   }
+
+  toggleModal = () => this.setState({
+    isModalOpen: !this.state.isModalOpen
+  });
 
   render() {
     return (
@@ -51,6 +56,11 @@ class App extends React.Component {
         <NavbarTop
           onScreenShotCapture={this.onScreenShotCapture}
           onAddDraggable={this.addDraggable.bind(this)}
+          toggleModal={this.toggleModal}
+        />
+        <InstructionsModal
+          isOpen={this.state.isModalOpen}
+          toggle={this.toggleModal}
         />
         <Editor>
           {this.state.draggables.map(({ type, id }) => {

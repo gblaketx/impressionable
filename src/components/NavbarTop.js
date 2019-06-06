@@ -6,22 +6,21 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
-import { IoMdCreate, IoMdDownload } from 'react-icons/io';
-import sigma from '../icons/sigma.svg';    
+    NavLink } from 'reactstrap';
+import ReactTooltip from 'react-tooltip'
+import {
+    IoMdCreate,
+    IoMdDownload,
+    IoIosInformationCircleOutline,
+    IoIosPersonAdd } from 'react-icons/io';
+import sigma from '../icons/sigma.svg';
+import logo from '../icons/contract.svg';
 
 export default class NavbarTop extends Component {
     constructor(props) {
         super(props);
-    
         this.toggle = this.toggle.bind(this);
-        this.state = {
-        isOpen: false
-        };
+        this.state = { isOpen: false };
     }
     toggle() {
         this.setState({
@@ -29,35 +28,49 @@ export default class NavbarTop extends Component {
         });
     }
     render() {
-        const { onAddDraggable } = this.props;
+        const { onAddDraggable, toggleModal } = this.props;
         return (
         <div>
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">Impressions</NavbarBrand>
+                <NavbarBrand href="/">
+                    <div>
+                        <img width={25} height={25} src={logo} alt="logo" />
+                        {' '}
+                        Impressions
+                    </div>
+                </NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
+                        <NavItem data-tip="Insert an equation">
                             <NavLink onClick={() => onAddDraggable('math')}>
-                                <img width={20} height={20} src={sigma} alt="sigma" />
+                                <img width={25} height={25} src={sigma} alt="sigma" />
                             </NavLink>
                         </NavItem>
-                        <NavItem>
+                        <NavItem data-tip="Insert a drawing canvas">
                             <NavLink onClick={() => onAddDraggable('canvas')}>
-                                <IoMdCreate />
+                                <IoMdCreate style={{ width: 30, height: 30 }} />
                             </NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink onClick={() => window.TogetherJS(this)}>Start Collaboration</NavLink>
+                        <NavItem data-tip="Toggle collaboration">
+                            <NavLink onClick={() => window.TogetherJS(this)}>
+                                <IoIosPersonAdd style={{ width: 30, height: 30 }} />
+                            </NavLink>
                         </NavItem>
-                        <NavItem>
+                        <NavItem data-tip="Save your notes to a PDF">
                             <NavLink onClick={() => window.print()}>
-                                <IoMdDownload />
+                                <IoMdDownload style={{ width: 30, height: 30 }} />
+                            </NavLink>
+                        </NavItem>
+                        <NavItem data-tip="Help">
+                            <NavLink onClick={toggleModal}>
+                                <IoIosInformationCircleOutline style={{ width: 30, height: 30 }} />
                             </NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
             </Navbar>
+            <ReactTooltip />
         </div>
         );
     }

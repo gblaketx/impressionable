@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import DrawableCanvas from "../DrawableCanvasCollab/DrawableCanvas";
-// import MathQuillInput from '../MathQuillInput';
 import './Editor.css'; 
 
 class Editor extends Component {
@@ -45,7 +43,10 @@ class Editor extends Component {
 
   render() {
     return (
-        <div style={{ display: 'flex' }}>
+        <div style={{
+          display: 'flex',
+          backgroundColor: '#ededed',
+        }}>
             <div id="firepad-container" />
             { this.props.children }
         </div>
