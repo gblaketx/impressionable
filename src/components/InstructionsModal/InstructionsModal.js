@@ -13,8 +13,6 @@ import './InstructionsModal.css';
 class InstructionsModal extends PureComponent {
   render() {
     const { isOpen, toggle } = this.props;
-    // const alignedImage = { position: 'absolute', 'marginTop': 10 };
-    // const alignedSpan = { display: 'inline-block', paddingLeft: '40px', whiteSpace: 'normal' };
 
     return (
       <Modal
@@ -54,7 +52,7 @@ class InstructionsModal extends PureComponent {
           <div className="noWrap">
             <IoIosCamera style={{ width: 30, height: 30 }} />
             <span className="alignedSpan">
-              Snap a picture: Click TODO to use your laptop camera to take a 
+              Snap a picture: Click the camera to use your laptop camera to take a 
               picture, which will be added to your notes.
             </span>
           </div>

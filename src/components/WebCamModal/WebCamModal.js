@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import sigma from '../../icons/sigma.svg'; 
 import collab from '../../icons/collab.png';
+import upload from '../../icons/uploadImage.png';
 import './WebCamModal.css'; 
 import WebCamAndCrop from '../WebCamAndCrop';
 
@@ -15,8 +16,6 @@ import WebCamAndCrop from '../WebCamAndCrop';
 class InstructionsModal extends PureComponent {
   render() {
     const { isOpen, toggle } = this.props;
-    // const alignedImage = { position: 'absolute', 'marginTop': 10 };
-    // const alignedSpan = { display: 'inline-block', paddingLeft: '40px', whiteSpace: 'normal' };
 
     return (
       <Modal
@@ -28,6 +27,8 @@ class InstructionsModal extends PureComponent {
           <WebCamAndCrop />
         </ModalBody>
         <ModalFooter>
+          Click on the <img src={upload} alt="upload" /> button to add your image to the document.
+          <span />
           <Button color="success" onClick={toggle}>Done!</Button>
         </ModalFooter>
       </Modal>
