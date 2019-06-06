@@ -4,6 +4,7 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import Webcam from "react-webcam";
 import Popup from "reactjs-popup";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 // import "./App.css";
 
@@ -15,6 +16,7 @@ export default class WebCamAndCrop extends React.Component {
     this.state = { 
       webcamEnabled: false,
       croppedBlob: null,
+      screenshot: "",
     };
     this.storageRef = null;
 
@@ -155,27 +157,25 @@ export default class WebCamAndCrop extends React.Component {
       // <Popup trigger={<button>Take screenshot</button>} position="right center">
         <div className="App">
           <div>
-            {this.state.webcamEnabled ? (
             <Webcam
               audio={false}
               height={600}
               ref={this.setRef}
               screenshotFormat="image/jpeg"
               width={900}
-              /> ) : null
-          } 
+              />
           </div>
 
-          <button type="button" onClick={this.enableWebcam}>
-            Enable webcam
-          </button>
-            
-
           <div>
-            <h2>Screenshots</h2>
             <div className='screenshots'>
-              <div className='controls'>
-                <button onClick={this.capture}>capture</button>
+              <div className='controls'
+                  style={{display:'flex', justifyContent: 'center'}}              
+              >
+                <Button 
+                  onClick={this.capture}
+                >
+                    Capture
+                </Button>
               </div>
                <ReactCrop
                 src={this.state.screenshot}

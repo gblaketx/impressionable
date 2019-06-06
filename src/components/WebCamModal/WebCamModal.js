@@ -28,7 +28,7 @@ class InstructionsModal extends PureComponent {
           <WebCamAndCrop />
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>Got it!</Button>
+          <Button color="success" onClick={toggle}>Done!</Button>
         </ModalFooter>
       </Modal>
     );

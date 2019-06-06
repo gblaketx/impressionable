@@ -36,7 +36,6 @@ class App extends React.Component {
   }
 
   onEnableWebcam() {
-    console.log("GOT HERE");
     this.toggleModalWebcam();
   }
 
