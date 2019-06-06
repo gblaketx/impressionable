@@ -1,8 +1,6 @@
 import React from 'react';
 import Editor from './components/Editor/Editor'
 import NavbarTop from './components/NavbarTop';
-import DropAndCrop from './components/DropAndCrop';
-import WebCamAndCrop from './components/WebCamAndCrop';
 import DrawableCanvas from './components/DrawableCanvasCollab/DrawableCanvas';
 import MathQuillInput from './components/MathQuillInput';
 import InstructionsModal from './components/InstructionsModal/InstructionsModal';
@@ -90,8 +88,9 @@ class App extends React.Component {
               return child;
             })}
           </Editor>
-          {/* <WebCamAndCrop /> */}
-          {/* <DropAndCrop /> */}
+          <div style={{ textAlign: 'right', paddingRight: 20, backgroundColor: '#ededed' }}>
+            Have feedback? Let us know <a href="https://forms.gle/nztmqXJKYQS1tBmc9">here</a>.
+          </div>
           {/* Icons made by <span />
           <a href="https://www.freepik.com/" title="Freepik">Freepik</a>
            <span /> from <span />

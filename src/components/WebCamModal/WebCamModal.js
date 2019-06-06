@@ -27,8 +27,9 @@ class InstructionsModal extends PureComponent {
           <WebCamAndCrop />
         </ModalBody>
         <ModalFooter>
-          Click on the <img src={upload} alt="upload" /> button to add your image to the document.
-          <span />
+          <span style={{ width: '100%' }}>
+            Click on the <img src={upload} alt="upload" /> button to add your image to the document.
+          </span>
           <Button color="success" onClick={toggle}>Done!</Button>
         </ModalFooter>
       </Modal>

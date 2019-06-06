@@ -50,7 +50,6 @@ class Editor extends Component {
             <div id="firepad-container" />
             { this.props.children }
         </div>
-        
     );
   }
 }
