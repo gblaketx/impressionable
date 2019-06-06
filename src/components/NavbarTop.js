@@ -15,6 +15,7 @@ import {
     IoIosPersonAdd } from 'react-icons/io';
 import sigma from '../icons/sigma.svg';
 import logo from '../icons/contract.svg';
+import camera from '../icons/camera.png';
 
 export default class NavbarTop extends Component {
     constructor(props) {
@@ -42,6 +43,11 @@ export default class NavbarTop extends Component {
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
+                        <NavItem data-tip="Insert a screenshot">
+                            <NavLink onClick={() => onAddDraggable('math')}>
+                                <img width={25} height={25} src={camera} alt="camera" />
+                            </NavLink>
+                        </NavItem>
                         <NavItem data-tip="Insert an equation">
                             <NavLink onClick={() => onAddDraggable('math')}>
                                 <img width={25} height={25} src={sigma} alt="sigma" />
