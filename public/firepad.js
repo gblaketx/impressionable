@@ -1773,7 +1773,7 @@ firepad.RichTextToolbar = (function(global) {
 
     if (self.imageInsertionUI) {
       // toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-image')], { 'class': 'firepad-btn-group' }));
-      toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-image'), self.makeButton_('insert-math')], {'class': 'firepad-btn-group'}));
+      toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-image')], {'class': 'firepad-btn-group'}));
     }
 
     toolbarOptions.push(utils.elt('div', [self.makeButton_('insert-screenshot')], {'class': 'firepad-btn-group'}));
