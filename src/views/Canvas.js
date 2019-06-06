@@ -13,8 +13,8 @@ export default class Canvas extends Component {
             <div>
                 <NavbarTop onScreenShotCapture={this.onScreenShotCapture} />
                 <Editor />
-                <WebCamAndCrop />
-                <App />
+                {/* <WebCamAndCrop /> */}
+                {/* <App /> */}
            </div>
         )
     }

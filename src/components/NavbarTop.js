@@ -13,6 +13,7 @@ import {
     IoMdDownload,
     IoIosInformationCircleOutline,
     IoIosPersonAdd } from 'react-icons/io';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import sigma from '../icons/sigma.svg';
 import logo from '../icons/contract.svg';
 import camera from '../icons/camera.png';
@@ -28,8 +29,9 @@ export default class NavbarTop extends Component {
         isOpen: !this.state.isOpen
         });
     }
+
     render() {
-        const { onAddDraggable, toggleModal } = this.props;
+        const { onAddDraggable, toggleModal, onEnableWebcam } = this.props;
         return (
         <div>
             <Navbar color="light" light expand="md">
@@ -44,7 +46,7 @@ export default class NavbarTop extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem data-tip="Insert a screenshot">
-                            <NavLink onClick={() => onAddDraggable('math')}>
+                            <NavLink onClick={() => onEnableWebcam()}>
                                 <img width={25} height={25} src={camera} alt="camera" />
                             </NavLink>
                         </NavItem>

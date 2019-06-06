@@ -6,6 +6,8 @@ import WebCamAndCrop from './components/WebCamAndCrop';
 import DrawableCanvas from './components/DrawableCanvasCollab/DrawableCanvas';
 import MathQuillInput from './components/MathQuillInput';
 import InstructionsModal from './components/InstructionsModal/InstructionsModal';
+import WebCamModal from './components/WebCamModal/WebCamModal';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class App extends React.Component {
     this.state = {
       draggables: [],
       isModalOpen: true,
+      isModalOpenWebcam: false,
     }
   }
 
@@ -30,6 +33,11 @@ class App extends React.Component {
 
   onScreenShotCapture() {
     console.log("SCREEN CAPTURED");
+  }
+
+  onEnableWebcam() {
+    console.log("GOT HERE");
+    this.toggleModalWebcam();
   }
 
   addDraggable(type) {
@@ -50,31 +58,41 @@ class App extends React.Component {
     isModalOpen: !this.state.isModalOpen
   });
 
+  toggleModalWebcam = () => this.setState({
+    isModalOpenWebcam: !this.state.isModalOpenWebcam
+  });
+
   render() {
     return (
       <div className="App">
         <NavbarTop
-          onScreenShotCapture={this.onScreenShotCapture}
+          onEnableWebcam={this.onEnableWebcam.bind(this)}
+          onScreenShotCapture={this.onScreenShotCapture.bind(this)}
           onAddDraggable={this.addDraggable.bind(this)}
           toggleModal={this.toggleModal}
         />
-        <InstructionsModal
-          isOpen={this.state.isModalOpen}
-          toggle={this.toggleModal}
-        />
-        <Editor>
-          {this.state.draggables.map(({ type, id }) => {
-            var child = null;
-            if (type === "canvas") {
-              child = <DrawableCanvas key={id} id={id} />;
-            } else if (type === "math") {
-              child = <MathQuillInput key={id} id={id} />;
-            }
-            return child;
-          })}
-        </Editor>
-        <WebCamAndCrop />
-        <DropAndCrop />
+          <InstructionsModal
+            isOpen={this.state.isModalOpen}
+            toggle={this.toggleModal}
+          />
+
+          <WebCamModal
+            isOpen={this.state.isModalOpenWebcam}
+            toggle={this.toggleModalWebcam}
+          />
+          <Editor>
+            {this.state.draggables.map(({ type, id }) => {
+              var child = null;
+              if (type === "canvas") {
+                child = <DrawableCanvas key={id} id={id} />;
+              } else if (type === "math") {
+                child = <MathQuillInput key={id} id={id} />;
+              }
+              return child;
+            })}
+          </Editor>
+          {/* <WebCamAndCrop /> */}
+          {/* <DropAndCrop /> */}
           {/* Icons made by <span />
           <a href="https://www.freepik.com/" title="Freepik">Freepik</a>
            <span /> from <span />

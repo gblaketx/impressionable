@@ -5,7 +5,6 @@ import "react-image-crop/dist/ReactCrop.css";
 import Webcam from "react-webcam";
 import Popup from "reactjs-popup";
 
-
 // import "./App.css";
 
 import firebase from 'firebase';
@@ -18,16 +17,17 @@ export default class WebCamAndCrop extends React.Component {
       croppedBlob: null,
     };
     this.storageRef = null;
-  }
 
-  componentDidMount() {
     var config = {
       apiKey: 'AIzaSyDQa22Mo0GWowVAgRyuVuxhv-op07n0u8k',
       authDomain: 'impressions-ef38e.firebaseapp.com',
       databaseURL: 'https://impressions-ef38e.firebaseio.com',
       storageBucket: 'gs://impressions-ef38e.appspot.com/'
     };
-    firebase.initializeApp(config);
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
   
     // Get a reference to the storage service, which is used to create references in your storage bucket
     var storage = firebase.storage();
@@ -152,16 +152,16 @@ export default class WebCamAndCrop extends React.Component {
     const { crop, croppedImageUrl, src } = this.state;
 
     return (
-      <Popup trigger={<button>Take screenshot</button>} position="right center">
+      // <Popup trigger={<button>Take screenshot</button>} position="right center">
         <div className="App">
           <div>
             {this.state.webcamEnabled ? (
             <Webcam
               audio={false}
-              height={350}
+              height={600}
               ref={this.setRef}
               screenshotFormat="image/jpeg"
-              width={350}
+              width={900}
               /> ) : null
           } 
           </div>
@@ -192,7 +192,7 @@ export default class WebCamAndCrop extends React.Component {
           )}
         </div>
         </div>
-      </Popup>
+      // </Popup>
 
     );
   }
